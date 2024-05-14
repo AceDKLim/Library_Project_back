@@ -1,0 +1,34 @@
+# spring:
+#   jpa:
+#     defer-datasource-initialization: true
+#     show-sql: true
+#     properties:
+#       hibernate:
+#         ddl-auto: update
+#         format_sql: true
+#         transcation:
+#           jta:
+#             platform:
+#               enable: true
+#   datasource:
+#     url: jdbc:h2:mem:testdb
+#   h2:
+#     console:
+#       enabled: true
+
+spring:
+  jpa:
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+    defer-datasource-initialization: true
+  datasource:
+    url: jdbc:h2:mem:testdb
+    username: lim
+  h2:
+    console:
+      enabled: true
+jwt:
+  issuer: 20213070@gs.cwnu.ac.kr
+  secret_key: library_project

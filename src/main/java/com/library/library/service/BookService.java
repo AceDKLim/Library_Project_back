@@ -27,7 +27,12 @@ public class BookService {
     }
 
     public Book findByIsbn_no(String isbn_no) {
-        return bookRepository.findById(isbn_no).orElseThrow(() -> new IllegalArgumentException("not found: " + isbn_no));
+        return bookRepository.findById(isbn_no)
+                .orElseThrow(() -> new IllegalArgumentException("not found: " + isbn_no));
+    }
+
+    public List<Book> SearchBook(String keyword) {
+        return bookRepository.findAllSearch(keyword);
     }
 
     public void delete(String isbn_no) {

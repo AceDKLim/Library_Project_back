@@ -22,12 +22,16 @@ public class ReviewService {
         return reviewRepository.save(request.toReview());
     }
 
-    public List<Review> findAll() {
-        return reviewRepository.findAll();
+    public Review findReview(Long id) {
+        return reviewRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("not found: " + id.toString()));
     }
 
-    public Review findById(long id) {
-        return reviewRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("not found: " + id));
+    public List<Review> findReviews(String isbn_no) {
+        return reviewRepository.findByIsbn_no(isbn_no);
+    }
+
+    public List<Review> findMyReviews(String student_number) {
+        return reviewRepository.findByStudent_number(student_number);
     }
 
     public void delete(long id) {

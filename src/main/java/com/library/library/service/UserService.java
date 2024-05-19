@@ -16,11 +16,10 @@ public class UserService {
     private final UserRepository userRepository;
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
-    public Long save(AddUserRequest dto) {
+    public User save(AddUserRequest dto) {
         return userRepository.save(
                 User.builder().studentID(dto.getStudentID()).password(bCryptPasswordEncoder.encode(dto.getPassword()))
-                        .nickname(dto.getNickname()).phone_number(dto.getPhone_number()).build())
-                .getId();
+                        .nickname(dto.getNickname()).phone_number(dto.getPhone_number()).build());
     }
 
     public User findById(Long userId) {

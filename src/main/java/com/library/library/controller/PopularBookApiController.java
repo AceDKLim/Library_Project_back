@@ -5,7 +5,6 @@ import java.util.List;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.library.library.domain.Book;
@@ -36,12 +35,5 @@ public class PopularBookApiController {
         }
 
         return ResponseEntity.ok().body(books);
-    }
-
-    @GetMapping("/api/books/{isbn_no}")
-    public ResponseEntity<BookResponse> findBook(@PathVariable String isbn_no) {
-        Book book = bookService.findByIsbn_no(isbn_no);
-        popularBookService.click(isbn_no);
-        return ResponseEntity.ok().body(new BookResponse(book));
     }
 }

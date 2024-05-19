@@ -8,7 +8,7 @@ import com.library.library.domain.Review;
 
 public interface ReviewRepository extends JpaRepository<Review, Long> {
 
-    public List<Review> findByIsbn_no(String isbn_no);
+    List<Review> findByIsbnNo(String isbnNo);
 
-    public List<Review> findByStudent_number(String student_number);
+    List<Review> findByStudentNumber(String studentNumber);
 }

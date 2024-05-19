@@ -20,19 +20,19 @@ public class PopularBookService {
     private final PopularBookRepository popularBookRepository;
 
     public List<PopularBookResponse> show() {
-        return popularBookRepository.findAllByCountDesc().stream().map(PopularBookResponse::new).toList();
+        return popularBookRepository.findAllByOrderByCountDesc().stream().map(PopularBookResponse::new).toList();
     }
 
     @Transactional
-    public PopularBook click(String isbn_no) {
+    public PopularBook click(String isbnNo) {
         PopularBook popularBook;
         try {
-            popularBook = popularBookRepository.findById(isbn_no).get();
+            popularBook = popularBookRepository.findById(isbnNo).get();
         } catch (Exception e) {
-            popularBookRepository.save(PopularBook.builder().isbn_no(isbn_no).count(0).build());
-            popularBook = popularBookRepository.findById(isbn_no).get();
+            popularBookRepository.save(PopularBook.builder().isbnNo(isbnNo).count(0).build());
+            popularBook = popularBookRepository.findById(isbnNo).get();
         }
-        popularBook.update(isbn_no);
+        popularBook.update(isbnNo);
         return popularBook;
     }
 

@@ -7,11 +7,11 @@ import lombok.Getter;
 @Getter
 public class PopularBookResponse {
 
-    private final String isbn_no;
+    private final String isbnNo;
     private final int count;
 
     public PopularBookResponse(PopularBook popularBook) {
-        this.isbn_no = popularBook.getIsbn_no();
+        this.isbnNo = popularBook.getIsbnNo();
         this.count = popularBook.getCount();
     }
 

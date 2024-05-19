@@ -14,20 +14,20 @@ import lombok.NoArgsConstructor;
 public class PopularBook {
 
     @Id
-    @Column(name = "isbn_no", nullable = false)
-    private String isbn_no;
+    @Column(name = "isbnNo", nullable = false)
+    private String isbnNo;
 
-    @Column(name = "title", nullable = false)
+    @Column(name = "count", nullable = false)
     private int count;
 
     @Builder
-    public PopularBook(String isbn_no, int count) {
-        this.isbn_no = isbn_no;
+    public PopularBook(String isbnNo, int count) {
+        this.isbnNo = isbnNo;
         this.count = count;
     }
 
-    public void update(String isbn_no) {
-        this.isbn_no = isbn_no;
+    public void update(String isbnNo) {
+        this.isbnNo = isbnNo;
         this.count = this.count + 1;
     }
 }

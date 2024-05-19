@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
 @Getter
 public class AddBookRequest {
 
-    private String isbn_no;
+    private String isbnNo;
     private String title;
     private String author;
     private String publish;
@@ -23,7 +23,7 @@ public class AddBookRequest {
     private String tags;
 
     public Book toBook() {
-        return Book.builder().isbn_no(isbn_no).title(title).author(author).publish(publish).p_year(p_year).num(num)
+        return Book.builder().isbnNo(isbnNo).title(title).author(author).publish(publish).p_year(p_year).num(num)
                 .location(location).image_src(image_src).detail_src(detail_src).tags(tags).build();
     }
 

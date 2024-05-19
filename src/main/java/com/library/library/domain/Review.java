@@ -26,29 +26,29 @@ public class Review {
     @Column(name = "content", nullable = false)
     private String content;
 
-    @Column(name = "isbn_no", nullable = false)
-    private String isbn_no;
+    @Column(name = "isbnNo", nullable = false)
+    private String isbnNo;
 
-    @Column(name = "student_number", nullable = false)
-    private String student_number;
+    @Column(name = "studentNumber", nullable = false)
+    private String studentNumber;
 
     @Column(name = "score", nullable = false)
     private String score;
 
     @Builder
-    public Review(String title, String content, String isbn_no, String student_number, String score) {
+    public Review(String title, String content, String isbnNo, String studentNumber, String score) {
         this.title = title;
         this.content = content;
-        this.isbn_no = isbn_no;
-        this.student_number = student_number;
+        this.isbnNo = isbnNo;
+        this.studentNumber = studentNumber;
         this.score = score;
     }
 
-    public void update(String title, String content, String isbn_no, String student_number, String score) {
+    public void update(String title, String content, String isbnNo, String studentNumber, String score) {
         this.title = title;
         this.content = content;
-        this.isbn_no = isbn_no;
-        this.student_number = student_number;
+        this.isbnNo = isbnNo;
+        this.studentNumber = studentNumber;
         this.score = score;
     }
 }

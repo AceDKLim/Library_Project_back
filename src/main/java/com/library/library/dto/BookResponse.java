@@ -7,7 +7,7 @@ import lombok.Getter;
 @Getter
 public class BookResponse {
 
-    private final String isbn_no;
+    private final String isbnNo;
     private final String title;
     private final String author;
     private final String publish;
@@ -19,7 +19,7 @@ public class BookResponse {
     private final String tags;
 
     public BookResponse(Book book) {
-        this.isbn_no = book.getIsbn_no();
+        this.isbnNo = book.getIsbnNo();
         this.title = book.getTitle();
         this.author = book.getAuthor();
         this.publish = book.getPublish();

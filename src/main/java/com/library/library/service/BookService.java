@@ -26,24 +26,24 @@ public class BookService {
         return bookRepository.findAll();
     }
 
-    public Book findByIsbn_no(String isbn_no) {
-        return bookRepository.findById(isbn_no)
-                .orElseThrow(() -> new IllegalArgumentException("not found: " + isbn_no));
+    public Book findByIsbnNo(String isbnNo) {
+        return bookRepository.findById(isbnNo)
+                .orElseThrow(() -> new IllegalArgumentException("not found: " + isbnNo));
     }
 
     public List<Book> SearchBook(String keyword) {
-        return bookRepository.findAllSearch(keyword);
+        return bookRepository.findByTitleContaining(keyword);
     }
 
-    public void delete(String isbn_no) {
-        bookRepository.deleteById(isbn_no);
+    public void delete(String isbnNo) {
+        bookRepository.deleteById(isbnNo);
     }
 
     @Transactional
-    public Book update(String isbn_no, UpdateBookRequest request) {
-        Book book = bookRepository.findById(isbn_no)
-                .orElseThrow(() -> new IllegalArgumentException("not found: " + isbn_no));
-        book.update(isbn_no, request.getTitle(), request.getAuthor(), request.getPublish(), request.getP_year(), request.getNum(), request.getLocation(), request.getImage_src(), request.getDetail_src(), request.getTags());
+    public Book update(String isbnNo, UpdateBookRequest request) {
+        Book book = bookRepository.findById(isbnNo)
+                .orElseThrow(() -> new IllegalArgumentException("not found: " + isbnNo));
+        book.update(isbnNo, request.getTitle(), request.getAuthor(), request.getPublish(), request.getP_year(), request.getNum(), request.getLocation(), request.getImage_src(), request.getDetail_src(), request.getTags());
         return book;
     }
 }

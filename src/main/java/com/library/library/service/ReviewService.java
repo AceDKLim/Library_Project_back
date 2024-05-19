@@ -26,12 +26,12 @@ public class ReviewService {
         return reviewRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("not found: " + id.toString()));
     }
 
-    public List<Review> findReviews(String isbn_no) {
-        return reviewRepository.findByIsbn_no(isbn_no);
+    public List<Review> findReviews(String isbnNo) {
+        return reviewRepository.findByIsbnNo(isbnNo);
     }
 
-    public List<Review> findMyReviews(String student_number) {
-        return reviewRepository.findByStudent_number(student_number);
+    public List<Review> findMyReviews(String studentnumber) {
+        return reviewRepository.findByStudentNumber(studentnumber);
     }
 
     public void delete(long id) {
@@ -42,7 +42,7 @@ public class ReviewService {
     public Review update(long id, UpdateReviewRequest request) {
         Review review = reviewRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("not found: " + id));
-        review.update(request.getTitle(), request.getContents(), request.getIsbn_no(), request.getStudent_number(), request.getScore());
+        review.update(request.getTitle(), request.getContents(), request.getIsbnNo(), request.getStudentNumber(), request.getScore());
         return review;
     }
 }

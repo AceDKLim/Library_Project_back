@@ -14,8 +14,8 @@ import lombok.NoArgsConstructor;
 public class Book {
 
     @Id
-    @Column(name = "isbn_no", nullable = false)
-    private String isbn_no;
+    @Column(name = "isbnNo", nullable = false)
+    private String isbnNo;
 
     @Column(name = "title", nullable = false)
     private String title;
@@ -45,9 +45,9 @@ public class Book {
     private String tags;
 
     @Builder
-    public Book(String isbn_no, String title, String author, String publish, String p_year, String num, String location,
+    public Book(String isbnNo, String title, String author, String publish, String p_year, String num, String location,
             String image_src, String detail_src, String tags) {
-        this.isbn_no = isbn_no;
+        this.isbnNo = isbnNo;
         this.title = title;
         this.author = author;
         this.publish = publish;
@@ -59,9 +59,9 @@ public class Book {
         this.tags = tags;
     }
 
-    public void update(String isbn_no, String title, String author, String publish, String p_year, String num, String location,
+    public void update(String isbnNo, String title, String author, String publish, String p_year, String num, String location,
             String image_src, String detail_src, String tags) {
-        this.isbn_no = isbn_no;
+        this.isbnNo = isbnNo;
         this.title = title;
         this.author = author;
         this.publish = publish;

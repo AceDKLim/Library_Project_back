@@ -8,5 +8,5 @@ import com.library.library.domain.PopularBook;
 
 public interface PopularBookRepository extends JpaRepository<PopularBook, String> {
 
-    List<PopularBook> findAllByCountDesc();
+    List<PopularBook> findAllByOrderByCountDesc();
 }

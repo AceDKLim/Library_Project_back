@@ -5,7 +5,6 @@ import java.util.List;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -15,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.library.library.domain.Review;
+import com.library.library.domain.User;
 import com.library.library.dto.AddReviewRequest;
 import com.library.library.dto.ReviewResponse;
 import com.library.library.dto.UpdateReviewRequest;
@@ -27,31 +27,31 @@ import lombok.RequiredArgsConstructor;
 public class ReviewApiController {
 
     private final ReviewService reviewService;
-    Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-    UserDetails userDetails = (UserDetails) principal;
 
     @PostMapping("/api/reviews")
     public ResponseEntity<Review> addReviw(@RequestBody AddReviewRequest request) {
-        Review savedBook = reviewService.save(request);
-        return ResponseEntity.status(HttpStatus.CREATED).body(savedBook);
+        Review savedReview = reviewService.save(request);
+        return ResponseEntity.status(HttpStatus.CREATED).body(savedReview);
     }
 
-    @GetMapping("/api/reviews/{isbn_no}")
-    public ResponseEntity<List<ReviewResponse>> findReviews(@PathVariable String isbn_no) {
-        List<ReviewResponse> reviews = reviewService.findReviews(isbn_no).stream().map(ReviewResponse::new).toList();
+    @GetMapping("/api/reviews/{isbnNo}")
+    public ResponseEntity<List<ReviewResponse>> findReviews(@PathVariable String isbnNo) {
+        List<ReviewResponse> reviews = reviewService.findReviews(isbnNo).stream().map(ReviewResponse::new).toList();
         return ResponseEntity.ok().body(reviews);
     }
 
-    @GetMapping("/api/reviews/")
+    @GetMapping("/api/reviews")
     public ResponseEntity<List<ReviewResponse>> findMyReviews() {
-        List<ReviewResponse> reviews = reviewService.findReviews(userDetails.getUsername()).stream().map(ReviewResponse::new).toList();
-        return ResponseEntity.ok().body(reviews);
+        User login_user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        List<ReviewResponse> reviews = reviewService.findMyReviews(login_user.getStudentID()).stream().map(ReviewResponse::new).toList();
+        return ResponseEntity.status(HttpStatus.CREATED).body(reviews);
     }
 
     @DeleteMapping("/api/reviews/{id}")
     public ResponseEntity<Void> deleteReview(@PathVariable long id) {
+        User login_user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         Review review = reviewService.findReview(id);
-        if (review.getStudent_number().equals(userDetails.getUsername())) {
+        if (review.getStudentNumber().equals(login_user.getStudentID())) {
             reviewService.delete(id);
             return ResponseEntity.ok().build();
         }
@@ -61,7 +61,8 @@ public class ReviewApiController {
     @PutMapping("/api/reviews/{id}")
     public ResponseEntity<Review> updateReview(@PathVariable long id, @RequestBody UpdateReviewRequest request) {
         Review review = reviewService.findReview(id);
-        if (review.getStudent_number().equals(userDetails.getUsername())) {
+        User login_user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        if (review.getStudentNumber().equals(login_user.getStudentID())) {
             Review updatReview = reviewService.update(id, request);
             return ResponseEntity.ok().body(updatReview);
         }

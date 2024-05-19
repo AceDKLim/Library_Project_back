@@ -42,10 +42,10 @@ public class BookApiController {
         return ResponseEntity.ok().body(books);
     }
 
-    @GetMapping("/api/books/{isbn_no}")
-    public ResponseEntity<BookResponse> findBook(@PathVariable String isbn_no) {
-        Book book = bookService.findByIsbn_no(isbn_no);
-        popularBookService.click(isbn_no);
+    @GetMapping("/api/books/{isbnNo}")
+    public ResponseEntity<BookResponse> findBook(@PathVariable String isbnNo) {
+        Book book = bookService.findByIsbnNo(isbnNo);
+        popularBookService.click(isbnNo);
         return ResponseEntity.ok().body(new BookResponse(book));
     }
 
@@ -56,16 +56,16 @@ public class BookApiController {
     }
 
     @Secured("ROLE_ADMIN")
-    @DeleteMapping("/api/books/{isbn_no}")
-    public ResponseEntity<Void> deleteBook(@PathVariable String isbn_no) {
-        bookService.delete(isbn_no);
+    @DeleteMapping("/api/books/{isbnNo}")
+    public ResponseEntity<Void> deleteBook(@PathVariable String isbnNo) {
+        bookService.delete(isbnNo);
         return ResponseEntity.ok().build();
     }
 
     @Secured("ROLE_ADMIN")
-    @PutMapping("/api/books/{isbn_no}")
-    public ResponseEntity<Book> updateBook(@PathVariable String isbn_no, @RequestBody UpdateBookRequest request) {
-        Book updatBook = bookService.update(isbn_no, request);
+    @PutMapping("/api/books/{isbnNo}")
+    public ResponseEntity<Book> updateBook(@PathVariable String isbnNo, @RequestBody UpdateBookRequest request) {
+        Book updatBook = bookService.update(isbnNo, request);
         return ResponseEntity.ok().body(updatBook);
     }
 }

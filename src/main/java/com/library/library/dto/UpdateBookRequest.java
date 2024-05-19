@@ -9,7 +9,6 @@ import lombok.NoArgsConstructor;
 @Getter
 public class UpdateBookRequest {
 
-    // private String isbn_no;
     private String title;
     private String author;
     private String publish;

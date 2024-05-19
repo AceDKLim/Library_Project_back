@@ -11,7 +11,7 @@ public class UpdateReviewRequest {
 
     private String title;
     private String contents;
-    private String isbn_no;
-    private String student_number;
+    private String isbnNo;
+    private String studentNumber;
     private String score;
 }

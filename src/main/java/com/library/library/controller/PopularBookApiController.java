@@ -29,8 +29,8 @@ public class PopularBookApiController {
 
         int len = Math.min(popular.size(), 10);
         for (int i = 0; i < len; i++) {
-            String isbn_no = popular.get(i).getIsbn_no();
-            Book book = bookService.findByIsbn_no(isbn_no);
+            String isbnNo = popular.get(i).getIsbnNo();
+            Book book = bookService.findByIsbnNo(isbnNo);
             books.add(new BookResponse(book));
         }
 

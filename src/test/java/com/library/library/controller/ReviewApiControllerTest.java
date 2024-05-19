@@ -11,7 +11,6 @@
 // import org.springframework.boot.test.context.SpringBootTest;
 // import org.springframework.http.MediaType;
 // import org.springframework.security.core.context.SecurityContextHolder;
-// import org.springframework.security.core.userdetails.UserDetails;
 // import org.springframework.test.web.servlet.MockMvc;
 // import org.springframework.test.web.servlet.ResultActions;
 // import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
@@ -25,6 +24,7 @@
 
 // import com.fasterxml.jackson.databind.ObjectMapper;
 // import com.library.library.domain.Review;
+// import com.library.library.domain.User;
 // import com.library.library.dto.AddReviewRequest;
 // import com.library.library.dto.UpdateReviewRequest;
 // import com.library.library.repository.ReviewRepository;
@@ -42,10 +42,6 @@
 //     @Autowired
 //     ReviewRepository reviewRepository;
 
-//     @Autowired
-//     Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-//     UserDetails userDetails = (UserDetails) principal;
-
 //     @BeforeEach
 //     public void mockMvcSetup() {
 //         this.mockMvc = MockMvcBuilders.webAppContextSetup(context).build();
@@ -55,13 +51,14 @@
 //     @DisplayName("addReview : 리뷰 쓰기에 성공한다.")
 //     @Test
 //     public void addReview() throws Exception {
+//         User login_user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 //         final String url = "/api/reviews";
 //         final String title = "title";
 //         final String content = "content";
-//         final String isbn_no = "isbn_no";
-//         final String student_number = userDetails.getUsername();
+//         final String isbnNo = "isbnNo";
+//         final String studentnumber = login_user.getStudentID();
 //         final String score = "score";
-//         final AddReviewRequest reviewRequest = new AddReviewRequest(principal, userDetails, title, content, isbn_no, score);
+//         final AddReviewRequest reviewRequest = new AddReviewRequest(login_user, title, content, isbnNo, score);
 
 //         final String requestBody = objectMapper.writeValueAsString(reviewRequest);
 
@@ -73,8 +70,8 @@
 //         assertThat(reviews.size()).isEqualTo(1);
 //         assertThat(reviews.get(0).getTitle()).isEqualTo(title);
 //         assertThat(reviews.get(0).getContent()).isEqualTo(content);
-//         assertThat(reviews.get(0).getIsbn_no()).isEqualTo(isbn_no);
-//         assertThat(reviews.get(0).getStudent_number()).isEqualTo(student_number);
+//         assertThat(reviews.get(0).getIsbnNo()).isEqualTo(isbnNo);
+//         assertThat(reviews.get(0).getStudentNumber()).isEqualTo(studentnumber);
 //         assertThat(reviews.get(0).getScore()).isEqualTo(score);
 
 //     }
@@ -86,11 +83,11 @@
 //         final String url = "/api/reviews";
 //         final String title = "title";
 //         final String content = "content";
-//         final String isbn_no = "isbn_no";
-//         final String student_number = "student_number";
+//         final String isbnNo = "isbnNo";
+//         final String studentnumber = "studentnumber";
 //         final String score = "score";
 //         reviewRepository.save(Review.builder()
-//                 .title(title).content(content).isbn_no(isbn_no).student_number(student_number).score(score).build());
+//                 .title(title).content(content).isbnNo(isbnNo).studentNumber(studentnumber).score(score).build());
 
 //         // when
 //         final ResultActions resultActions = mockMvc.perform(get(url)
@@ -101,8 +98,8 @@
 //                 .andExpect(status().isOk())
 //                 .andExpect(jsonPath("$[0].content").value(content))
 //                 .andExpect(jsonPath("$[0].title").value(title))
-//                 .andExpect(jsonPath("$[0].isbn_no").value(isbn_no))
-//                 .andExpect(jsonPath("$[0].student_number").value(student_number))
+//                 .andExpect(jsonPath("$[0].isbnNo").value(isbnNo))
+//                 .andExpect(jsonPath("$[0].studentnumber").value(studentnumber))
 //                 .andExpect(jsonPath("$[0].score").value(score));
 //     }
 
@@ -113,12 +110,12 @@
 //         final String url = "/api/reviews/{id}";
 //         final String title = "title";
 //         final String content = "content";
-//         final String isbn_no = "isbn_no";
-//         final String student_number = "student_number";
+//         final String isbnNo = "isbnNo";
+//         final String studentnumber = "studentnumber";
 //         final String score = "score";
 
-//         Review savedReview = reviewRepository.save(Review.builder().title(title).content(content).isbn_no(isbn_no)
-//                 .student_number(student_number).score(score).build());
+//         Review savedReview = reviewRepository.save(Review.builder().title(title).content(content).isbnNo(isbnNo)
+//                 .studentNumber(studentnumber).score(score).build());
 
 //         // when
 //         final ResultActions resultActions = mockMvc.perform(get(url, savedReview.getId()));
@@ -128,8 +125,8 @@
 //                 .andExpect(status().isOk())
 //                 .andExpect(jsonPath("$.content").value(content))
 //                 .andExpect(jsonPath("$.title").value(title))
-//                 .andExpect(jsonPath("$.isbn_no").value(isbn_no))
-//                 .andExpect(jsonPath("$.student_number").value(student_number))
+//                 .andExpect(jsonPath("$.isbnNo").value(isbnNo))
+//                 .andExpect(jsonPath("$.studentNumber").value(studentnumber))
 //                 .andExpect(jsonPath("$.score").value(score));
 //     }
 
@@ -140,12 +137,12 @@
 //         final String url = "/api/reviews/{id}";
 //         final String title = "title";
 //         final String content = "content";
-//         final String isbn_no = "isbn_no";
-//         final String student_number = "student_number";
+//         final String isbnNo = "isbnNo";
+//         final String studentnumber = "studentnumber";
 //         final String score = "score";
 
-//         Review savedReview = reviewRepository.save(Review.builder().title(title).content(content).isbn_no(isbn_no)
-//                 .student_number(student_number).score(score).build());
+//         Review savedReview = reviewRepository.save(Review.builder().title(title).content(content).isbnNo(isbnNo)
+//                 .studentNumber(studentnumber).score(score).build());
 
 //         // when
 //         mockMvc.perform(delete(url, savedReview.getId()))
@@ -164,20 +161,20 @@
 //         final String url = "/api/reviews/{id}";
 //         final String title = "title";
 //         final String content = "content";
-//         final String isbn_no = "isbn_no";
-//         final String student_number = "student_number";
+//         final String isbnNo = "isbnNo";
+//         final String studentnumber = "studentnumber";
 //         final String score = "score";
 
-//         Review savedReview = reviewRepository.save(Review.builder().title(title).content(content).isbn_no(isbn_no)
-//                 .student_number(student_number).score(score).build());
+//         Review savedReview = reviewRepository.save(Review.builder().title(title).content(content).isbnNo(isbnNo)
+//                 .studentNumber(studentnumber).score(score).build());
 
 //         final String newTitle = "new title";
 //         final String newContent = "new content";
-//         final String newIsbn_no = "isbn_no";
-//         final String newStudent_number = "student_number";
+//         final String newIsbnNo = "isbnNo";
+//         final String newStudentNumber = "studentnumber";
 //         final String newScore = "score";
 
-//         UpdateReviewRequest request = new UpdateReviewRequest(newTitle, newContent, newIsbn_no, newStudent_number, newScore);
+//         UpdateReviewRequest request = new UpdateReviewRequest(newTitle, newContent, newIsbnNo, newStudentNumber, newScore);
 //         // when
 //         ResultActions result = mockMvc.perform(put(url, savedReview.getId())
 //                 .contentType(MediaType.APPLICATION_JSON_VALUE)
@@ -187,8 +184,8 @@
 //         Review review = reviewRepository.findById(savedReview.getId()).get();
 //         assertThat(review.getTitle()).isEqualTo(newTitle);
 //         assertThat(review.getContent()).isEqualTo(newContent);
-//         assertThat(review.getIsbn_no()).isEqualTo(newIsbn_no);
-//         assertThat(review.getStudent_number()).isEqualTo(newStudent_number);
+//         assertThat(review.getIsbnNo()).isEqualTo(newIsbnNo);
+//         assertThat(review.getStudentNumber()).isEqualTo(newStudentNumber);
 //         assertThat(review.getScore()).isEqualTo(newScore);
 //     }
 // }

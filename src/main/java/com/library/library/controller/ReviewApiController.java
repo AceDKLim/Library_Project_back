@@ -48,12 +48,12 @@ public class ReviewApiController {
     }
 
     @DeleteMapping("/api/reviews/{id}")
-    public ResponseEntity<Void> deleteReview(@PathVariable long id) {
+    public ResponseEntity<Review> deleteReview(@PathVariable long id) {
         User login_user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         Review review = reviewService.findReview(id);
         if (review.getStudentNumber().equals(login_user.getStudentID())) {
             reviewService.delete(id);
-            return ResponseEntity.ok().build();
+            return ResponseEntity.ok().body(review);
         }
         return ResponseEntity.accepted().build();
     }

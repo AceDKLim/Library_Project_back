@@ -37,7 +37,7 @@ public class UserApiController {
         return ResponseEntity.ok().build();
     }
 
-    @GetMapping("api/check/{studentNumber}")
+    @GetMapping("api/checkId/{studentNumber}")
     public boolean checkStudentNumber(@PathVariable String studentNumber) {
         try {
             userService.findById(studentNumber);
@@ -47,7 +47,7 @@ public class UserApiController {
         }
     }
 
-    @GetMapping("api/check/{nickname}")
+    @GetMapping("api/checkNickname/{nickname}")
     public boolean chechNickname(@PathVariable String nickname) {
         try {
             userService.findByNickname(nickname);

@@ -36,6 +36,13 @@ public class PopularBookService {
         return popularBook;
     }
 
+    public void delete(String isbnNo) {
+        try {
+            popularBookRepository.deleteById(isbnNo);
+        } catch (Exception e) {
+        }
+    }
+
     @Transactional
     @Async
     @Scheduled(cron = "0 0 0 MON")

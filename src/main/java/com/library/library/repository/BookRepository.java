@@ -9,4 +9,6 @@ import com.library.library.domain.Book;
 public interface BookRepository extends JpaRepository<Book, String> {
 
     List<Book> findByTitleContaining(String keyword);
+
+    Book findByIsbnNo(String isbnNo);
 }

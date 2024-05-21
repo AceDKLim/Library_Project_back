@@ -42,7 +42,7 @@ public class ReviewService {
     public Review update(long id, UpdateReviewRequest request) {
         Review review = reviewRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("not found: " + id));
-        review.update(request.getTitle(), request.getContents(), request.getIsbnNo(), request.getStudentNumber(), request.getScore());
+        review.update(request.getTitle(), request.getContent(), request.getIsbnNo(), review.getStudentNumber(), request.getScore());
         return review;
     }
 }

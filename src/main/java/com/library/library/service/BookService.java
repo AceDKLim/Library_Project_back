@@ -27,8 +27,7 @@ public class BookService {
     }
 
     public Book findByIsbnNo(String isbnNo) {
-        return bookRepository.findById(isbnNo)
-                .orElseThrow(() -> new IllegalArgumentException("not found: " + isbnNo));
+        return bookRepository.findByIsbnNo(isbnNo);
     }
 
     public List<Book> SearchBook(String keyword) {

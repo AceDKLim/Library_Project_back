@@ -7,6 +7,7 @@ import lombok.Getter;
 @Getter
 public class ReviewResponse {
 
+    private final Long id;
     private final String title;
     private final String content;
     private final String isbnNo;
@@ -14,6 +15,7 @@ public class ReviewResponse {
     private final String score;
 
     public ReviewResponse(Review review) {
+        this.id = review.getId();
         this.title = review.getTitle();
         this.content = review.getContent();
         this.isbnNo = review.getIsbnNo();

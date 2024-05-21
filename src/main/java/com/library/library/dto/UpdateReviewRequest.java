@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 public class UpdateReviewRequest {
 
     private String title;
-    private String contents;
+    private String content;
     private String isbnNo;
     private String studentNumber;
     private String score;

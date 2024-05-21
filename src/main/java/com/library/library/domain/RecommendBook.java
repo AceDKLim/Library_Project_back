@@ -11,7 +11,7 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-@Table(name = "popular")
+@Table(name = "recommend")
 @Entity
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)

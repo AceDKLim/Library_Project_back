@@ -6,6 +6,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
@@ -36,8 +37,8 @@ public class UserApiController {
         return ResponseEntity.ok().build();
     }
 
-    @PostMapping("api/check/studentnumber")
-    public boolean checkStudentNumber(@RequestBody String studentNumber) {
+    @GetMapping("api/check/{studentNumber}")
+    public boolean checkStudentNumber(@PathVariable String studentNumber) {
         try {
             userService.findById(studentNumber);
             return true;
@@ -46,8 +47,8 @@ public class UserApiController {
         }
     }
 
-    @PostMapping("api/check/nickname")
-    public boolean chechNickname(@RequestBody String nickname) {
+    @GetMapping("api/check/{nickname}")
+    public boolean chechNickname(@PathVariable String nickname) {
         try {
             userService.findByNickname(nickname);
             return true;

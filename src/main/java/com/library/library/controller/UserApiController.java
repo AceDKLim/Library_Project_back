@@ -35,4 +35,26 @@ public class UserApiController {
                 SecurityContextHolder.getContext().getAuthentication());
         return ResponseEntity.ok().build();
     }
+
+    @PostMapping("api/check/studentnumber")
+    public boolean checkStudentNumber(@RequestBody String studentNumber) {
+        try {
+            userService.findById(studentNumber);
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
+    @PostMapping("api/check/nickname")
+    public boolean chechNickname(@RequestBody String nickname) {
+        try {
+            userService.findByNickname(nickname);
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
+
+    }
+
 }

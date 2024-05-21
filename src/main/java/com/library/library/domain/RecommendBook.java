@@ -2,6 +2,8 @@ package com.library.library.domain;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import lombok.AccessLevel;
@@ -13,23 +15,27 @@ import lombok.NoArgsConstructor;
 @Entity
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class PopularBook {
+public class RecommendBook {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id", updatable = false)
+    private Long id;
+
     @Column(name = "isbnNo", nullable = false)
     private String isbnNo;
 
-    @Column(name = "count", nullable = false)
-    private int count;
+    @Column(name = "studentID", nullable = false)
+    private String studentID;
 
     @Builder
-    public PopularBook(String isbnNo, int count) {
+    public RecommendBook(String isbnNo, String studentID) {
         this.isbnNo = isbnNo;
-        this.count = count;
+        this.studentID = studentID;
     }
 
-    public void update(String isbnNo) {
+    public void update(String isbnNo, String studentID) {
         this.isbnNo = isbnNo;
-        this.count = this.count + 1;
+        this.studentID = studentID;
     }
 }

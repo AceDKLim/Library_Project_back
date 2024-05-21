@@ -22,7 +22,13 @@ public class UserService {
                         .nickname(dto.getNickname()).phone_number(dto.getPhone_number()).build());
     }
 
-    public User findById(Long userId) {
-        return userRepository.findById(userId).orElseThrow(() -> new IllegalArgumentException("Unexpected user"));
+    public User findById(String studentNumber) {
+        return userRepository.findByStudentID(studentNumber)
+                .orElseThrow(() -> new IllegalArgumentException("Unexpected user"));
+    }
+
+    public User findByNickname(String nickname) {
+        return userRepository.findByNickname(nickname)
+                .orElseThrow(() -> new IllegalArgumentException("Unexpected user"));
     }
 }

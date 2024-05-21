@@ -43,7 +43,9 @@ public class BookService {
     public Book update(String isbnNo, UpdateBookRequest request) {
         Book book = bookRepository.findById(isbnNo)
                 .orElseThrow(() -> new IllegalArgumentException("not found: " + isbnNo));
-        book.update(isbnNo, request.getTitle(), request.getAuthor(), request.getPublish(), request.getP_year(), request.getNum(), request.getLocation(), request.getImage_src(), request.getDetail_src(), request.getTags());
+        book.update(isbnNo, request.getTitle(), request.getAuthor(), request.getPublish(), request.getPubyear(),
+                request.getNum(), request.getLocation(), request.getImageSrc(), request.getDetailSrc(),
+                request.getTags());
         return book;
     }
 }

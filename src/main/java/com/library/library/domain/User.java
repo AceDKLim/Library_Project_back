@@ -41,15 +41,12 @@ public class User implements UserDetails {
     @Column(name = "phone_number")
     private String phone_number;
 
-    // @Column(name = "role")
-    // private String role;
     @Builder
     public User(String studentID, String password, String nickname, String phone_number) {
         this.studentID = studentID;
         this.password = password;
         this.nickname = nickname;
         this.phone_number = phone_number;
-        // this.role = "user";
     }
 
     @Override

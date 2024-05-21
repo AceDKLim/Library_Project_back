@@ -15,16 +15,16 @@ public class AddBookRequest {
     private String title;
     private String author;
     private String publish;
-    private String p_year;
+    private String pubyear;
     private String num;
     private String location;
-    private String image_src;
-    private String detail_src;
+    private String imageSrc;
+    private String detailSrc;
     private String tags;
 
     public Book toBook() {
-        return Book.builder().isbnNo(isbnNo).title(title).author(author).publish(publish).p_year(p_year).num(num)
-                .location(location).image_src(image_src).detail_src(detail_src).tags(tags).build();
+        return Book.builder().isbnNo(isbnNo).title(title).author(author).publish(publish).pubyear(pubyear).num(num)
+                .location(location).imageSrc(imageSrc).detailSrc(detailSrc).tags(tags).build();
     }
 
 }

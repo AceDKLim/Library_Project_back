@@ -23,12 +23,10 @@ public class UserService {
     }
 
     public User findById(String studentNumber) {
-        return userRepository.findByStudentID(studentNumber)
-                .orElseThrow(() -> new IllegalArgumentException("Unexpected user"));
+        return userRepository.findByStudentID(studentNumber);
     }
 
     public User findByNickname(String nickname) {
-        return userRepository.findByNickname(nickname)
-                .orElseThrow(() -> new IllegalArgumentException("Unexpected user"));
+        return userRepository.findByNickname(nickname);
     }
 }

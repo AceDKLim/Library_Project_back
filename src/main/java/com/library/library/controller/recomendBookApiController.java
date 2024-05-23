@@ -4,13 +4,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.library.library.domain.Book;
+import com.library.library.domain.User;
 import com.library.library.dto.BookResponse;
-import com.library.library.dto.RecommendBookResponse;
 import com.library.library.service.BookService;
 import com.library.library.service.RecommendBookService;
 
@@ -23,15 +24,15 @@ public class recomendBookApiController {
     private final BookService bookService;
     private final RecommendBookService recommendBookService;
 
-    @GetMapping("/api/recommendbook/{studentID}")
-    public ResponseEntity<List<BookResponse>> findPopularBooks(@PathVariable String studentID) {
-        List<RecommendBookResponse> recommend = recommendBookService.findbyStudentID(studentID);
+    @GetMapping("/api/recommendbook")
+    public ResponseEntity<List<BookResponse>> findRecommendBooks() {
+        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        String recommendBook = recommendBookService.findbyStudentID(user.getStudentID()).getIsbnNo();
         List<BookResponse> books = new ArrayList<>();
-
-        int len = Math.min(recommend.size(), 10);
+        String recommendBooks[] = recommendBook.split(",");
+        int len = Math.min(recommendBooks.length, 10);
         for (int i = 0; i < len; i++) {
-            String isbnNo = recommend.get(i).getIsbnNo();
-            Book book = bookService.findByIsbnNo(isbnNo);
+            Book book = bookService.findByIsbnNo(recommendBooks[i]);
             books.add(new BookResponse(book));
         }
 

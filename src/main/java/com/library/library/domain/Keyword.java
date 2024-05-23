@@ -9,26 +9,25 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-@Table(name = "recommend")
+@Table(name = "keyword")
 @Entity
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class RecommendBook {
-
+public class Keyword {
     @Id
     @Column(name = "studentID", nullable = false)
     private String studentID;
 
-    @Column(name = "isbnNo", nullable = false)
-    private String isbnNo;
+    @Column(name = "tags", nullable = false)
+    private String tags;
 
     @Builder
-    public RecommendBook(String studentID, String isbnNo) {
+    public Keyword(String studentID, String tags) {
         this.studentID = studentID;
-        this.isbnNo = isbnNo;
+        this.tags = tags;
     }
 
-    public void update(String isbnNo) {
-        this.isbnNo = isbnNo;
+    public void update(String studentID, String tags) {
+        this.tags = this.tags + tags;
     }
 }

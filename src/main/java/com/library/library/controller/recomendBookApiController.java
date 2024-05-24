@@ -10,12 +10,15 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.library.library.domain.Book;
+import com.library.library.domain.RecommendBook;
 import com.library.library.domain.User;
 import com.library.library.dto.BookResponse;
 import com.library.library.service.BookService;
 import com.library.library.service.RecommendBookService;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 
 @RequiredArgsConstructor
 @RestController
@@ -24,7 +27,15 @@ public class recomendBookApiController {
     private final BookService bookService;
     private final RecommendBookService recommendBookService;
 
-    @GetMapping("/api/recommendbook")
+    // @PostMapping("/api/recommend")
+    // public ResponseEntity<RecommendBook> addRecommend(@RequestBody String entity)
+    // {
+    // //TODO: process POST request
+
+    // return entity;
+    // }
+
+    @GetMapping("/api/recommend")
     public ResponseEntity<List<BookResponse>> findRecommendBooks() {
         User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         String recommendBook = recommendBookService.findbyStudentID(user.getStudentID()).getIsbnNo();

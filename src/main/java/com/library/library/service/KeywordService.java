@@ -15,6 +15,7 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 @Service
 public class KeywordService {
+
     private final KeywordRepository keywordRepository;
 
     public Keyword saveKeyword(AddKeywordRequest request) {
@@ -23,13 +24,13 @@ public class KeywordService {
 
     public Keyword findKeywords() {
         User login_user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        return keywordRepository.findByStudentId(login_user.getStudentID());
+        return keywordRepository.findByStudentID(login_user.getStudentID());
     }
 
     @Transactional
     public Keyword update(UpdateKeywordRequest tags) {
         User login_user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        Keyword keyword = keywordRepository.findByStudentId(login_user.getStudentID());
+        Keyword keyword = keywordRepository.findByStudentID(login_user.getStudentID());
         keyword.update(login_user.getStudentID(), tags.getTags());
         return keyword;
     }

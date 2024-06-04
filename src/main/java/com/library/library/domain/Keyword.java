@@ -14,6 +14,7 @@ import lombok.NoArgsConstructor;
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Keyword {
+
     @Id
     @Column(name = "studentID", nullable = false)
     private String studentID;
@@ -28,6 +29,6 @@ public class Keyword {
     }
 
     public void update(String studentID, String tags) {
-        this.tags = this.tags + tags;
+        this.tags = this.tags + "," + tags;
     }
 }

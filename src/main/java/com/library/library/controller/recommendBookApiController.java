@@ -22,7 +22,7 @@ import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
 @RestController
-public class recomendBookApiController {
+public class recommendBookApiController {
 
     private final BookService bookService;
     private final RecommendBookService recommendBookService;

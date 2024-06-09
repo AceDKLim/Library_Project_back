@@ -30,8 +30,10 @@ public class KeywordApiController {
     @PostMapping("/api/keywords")
     public ResponseEntity<Keyword> addKeyword(@RequestBody AddKeywordRequest request) {
         Keyword keyword = keywordService.saveKeyword(request);
-        AddRecommendRequest result = recommendedService.getIsbn(keyword);
-        recommendBookService.save(result);
+        System.out.println(keyword.getTags());
+        String result = recommendedService.getIsbn(keyword);
+        AddRecommendRequest recommend = new AddRecommendRequest(result);
+        recommendBookService.save(recommend);
         return ResponseEntity.status(HttpStatus.CREATED).body(keyword);
     }
 

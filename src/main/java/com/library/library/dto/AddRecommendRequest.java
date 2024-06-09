@@ -8,18 +8,17 @@ import com.library.library.domain.User;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
-@Setter
+// @Setter
 public class AddRecommendRequest {
 
-    User login_user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
     private String tags;
 
     public RecommendBook toRecommendBook() {
+        User login_user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         return RecommendBook.builder().studentID(login_user.getStudentID()).isbnNo(tags).build();
     }
 }

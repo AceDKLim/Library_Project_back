@@ -25,7 +25,7 @@ public class RecommendedService {
         HashMap<String, String> requestBody = new HashMap<>();
         requestBody.put("keyword", keyword.getTags());
         HttpEntity<Object> request = new HttpEntity<>(requestBody, header);
-        ResponseEntity<String> response = restTemplate.exchange(Aiurl, HttpMethod.POST, request, String.class);
-        return response.getBody();
+        ResponseEntity<Object> response = restTemplate.exchange(Aiurl, HttpMethod.POST, request, Object.class);
+        return response.getBody().toString();
     }
 }

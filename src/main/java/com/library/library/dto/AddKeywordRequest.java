@@ -13,6 +13,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Getter
 public class AddKeywordRequest {
+
     User login_user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
     private String tag1;
     private String tag2;

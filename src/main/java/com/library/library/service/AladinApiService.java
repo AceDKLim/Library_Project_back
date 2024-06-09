@@ -42,7 +42,7 @@ public class AladinApiService {
             + Version;
 
     public ResponseEntity<Object> getBook(String url) {
-        HashMap<String, Object> result = new HashMap<>();
+        // HashMap<String, Object> result = new HashMap<>();
         ResponseEntity<Object> resultMap = new ResponseEntity<>(null, null, 200);
         try {
             RestTemplate restTemplate = new RestTemplate();
@@ -52,18 +52,18 @@ public class AladinApiService {
                     .fromHttpUrl(url)
                     .build();
             resultMap = restTemplate.exchange(uri.toString(), HttpMethod.GET, entity, Object.class);
-            result.put("statusCode", resultMap.getStatusCode());
-            result.put("header", resultMap.getHeaders());
-            result.put("body", resultMap.getBody());
+            // result.put("statusCode", resultMap.getStatusCode());
+            // result.put("header", resultMap.getHeaders());
+            // result.put("body", resultMap.getBody());
         } catch (HttpClientErrorException | HttpServerErrorException e) {
-            result.put("statusCode", e.getStatusCode());
-            result.put("body", e.getStatusText());
+            // result.put("statusCode", e.getStatusCode());
+            // result.put("body", e.getStatusText());
             System.out.println("error");
             System.out.println(e.toString());
             return resultMap;
         } catch (RestClientException e) {
-            result.put("statusCode", "999");
-            result.put("body", "exception error");
+            // result.put("statusCode", "999");
+            // result.put("body", "exception error");
             System.out.println(e.toString());
             return resultMap;
         }

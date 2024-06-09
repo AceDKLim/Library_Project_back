@@ -39,22 +39,18 @@ public class UserApiController {
 
     @GetMapping("api/check/id/{studentNumber}")
     public ResponseEntity<Boolean> checkStudentNumber(@PathVariable String studentNumber) {
-        try {
-            userService.findById(studentNumber);
-            return ResponseEntity.accepted().body(true);
-        } catch (Exception e) {
+        if (userService.findById(studentNumber) == null) {
             return ResponseEntity.accepted().body(false);
         }
+        return ResponseEntity.accepted().body(true);
     }
 
     @GetMapping("api/check/nickname/{nickname}")
     public ResponseEntity<Boolean> chechNickname(@PathVariable String nickname) {
-        try {
-            userService.findByNickname(nickname);
-            return ResponseEntity.accepted().body(true);
-        } catch (Exception e) {
+        if (userService.findByNickname(nickname) == null) {
             return ResponseEntity.accepted().body(false);
         }
+        return ResponseEntity.accepted().body(true);
 
     }
 

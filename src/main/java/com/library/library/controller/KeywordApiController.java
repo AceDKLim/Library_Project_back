@@ -2,7 +2,9 @@ package com.library.library.controller;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -16,8 +18,6 @@ import com.library.library.service.RecommendBookService;
 import com.library.library.service.RecommendedService;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PutMapping;
 
 @RequiredArgsConstructor
 @RestController
@@ -30,10 +30,8 @@ public class KeywordApiController {
     @PostMapping("/api/keywords")
     public ResponseEntity<Keyword> addKeyword(@RequestBody AddKeywordRequest request) {
         Keyword keyword = keywordService.saveKeyword(request);
-        String result = recommendedService.getIsbn(keyword);
-        AddRecommendRequest recommend = new AddRecommendRequest();
-        recommend.keyword = result;
-        recommendBookService.save(recommend);
+        AddRecommendRequest result = recommendedService.getIsbn(keyword);
+        recommendBookService.save(result);
         return ResponseEntity.status(HttpStatus.CREATED).body(keyword);
     }
 

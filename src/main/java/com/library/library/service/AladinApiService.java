@@ -8,6 +8,7 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
@@ -26,8 +27,11 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 @Service
 public class AladinApiService {
 
+    @Value("${API-Key.aladinKey}")
+    private String key;
+
     private final String BASE_URL = "https://www.aladin.co.kr/ttb/api/ItemList.aspx";
-    private final String ttbkey = "?ttbkey=ttbeleven10001124001";
+    private final String ttbkey = "?ttbkey=" + key;
     private final String bestQueryType = "&QueryType=Bestseller";
     private final String newQueryType = "&QueryType=ItemNewSpecial";
     private final String SearchTarget = "&SearchTarget=Book";

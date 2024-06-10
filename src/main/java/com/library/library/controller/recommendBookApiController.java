@@ -39,8 +39,7 @@ public class recommendBookApiController {
         String recommendBook = recommendBookService.findbyStudentID(user.getStudentID()).getIsbnNo();
         List<Book> books = new ArrayList<>();
         String recommendBooks[] = recommendBook.split(",");
-        int len = Math.min(recommendBooks.length, 11);
-        for (int i = 0; i < len; i++) {
+        for (int i = 0; i < 10; i++) {
             Book book = bookService.findByIsbnNo(recommendBooks[i]);
             books.add(book);
         }

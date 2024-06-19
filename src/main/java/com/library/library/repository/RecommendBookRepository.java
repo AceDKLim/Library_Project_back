@@ -4,7 +4,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.library.library.domain.RecommendBook;
 
-public interface RecomendBookRepository extends JpaRepository<RecommendBook, String> {
+public interface RecommendBookRepository extends JpaRepository<RecommendBook, String> {
 
     RecommendBook findByStudentID(String studentID);
 }

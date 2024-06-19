@@ -37,6 +37,12 @@ public class UserApiController {
         return ResponseEntity.ok().build();
     }
 
+    @GetMapping("api/user")
+    public ResponseEntity<User> getUser() {
+        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        return ResponseEntity.ok().body(user);
+    }
+
     @GetMapping("api/check/id/{studentNumber}")
     public ResponseEntity<Boolean> checkStudentNumber(@PathVariable String studentNumber) {
         if (userService.findById(studentNumber) == null) {

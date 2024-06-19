@@ -2,7 +2,6 @@ package com.library.library.service;
 
 import java.util.HashMap;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -16,15 +15,17 @@ import com.library.library.domain.Keyword;
 @Service
 public class RecommendedService {
 
-    @Autowired
-    private RestTemplate restTemplate;
-    @Value("${API-KEY.aiKey}")
+    private final RestTemplate restTemplate;
+
+    @Value("${API-Key.aiKey}")
     private String Aiurl;
 
+    public RecommendedService(RestTemplate restTemplate) {
+        this.restTemplate = restTemplate;
+    }
+
     public String getIsbn(Keyword keyword) {
-
         HttpHeaders header = new HttpHeaders();
-
         HashMap<String, String> requestBody = new HashMap<>();
         requestBody.put("keyword", keyword.getTags());
         HttpEntity<Object> request = new HttpEntity<>(requestBody, header);

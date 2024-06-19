@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.library.library.domain.Book;
-import com.library.library.dto.BookResponse;
 import com.library.library.dto.PopularBookResponse;
 import com.library.library.service.BookService;
 import com.library.library.service.PopularBookService;
@@ -23,15 +22,15 @@ public class PopularBookApiController {
     private final PopularBookService popularBookService;
 
     @GetMapping("/api/popularbooks")
-    public ResponseEntity<List<BookResponse>> findPopularBooks() {
+    public ResponseEntity<List<Book>> findPopularBooks() {
         List<PopularBookResponse> popular = popularBookService.show();
-        List<BookResponse> books = new ArrayList<>();
+        List<Book> books = new ArrayList<>();
 
         int len = Math.min(popular.size(), 10);
         for (int i = 0; i < len; i++) {
             String isbnNo = popular.get(i).getIsbnNo();
             Book book = bookService.findByIsbnNo(isbnNo);
-            books.add(new BookResponse(book));
+            books.add(book);
         }
 
         return ResponseEntity.ok().body(books);

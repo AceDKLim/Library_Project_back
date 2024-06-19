@@ -6,7 +6,7 @@ import org.springframework.stereotype.Service;
 import com.library.library.domain.RecommendBook;
 import com.library.library.domain.User;
 import com.library.library.dto.AddRecommendRequest;
-import com.library.library.repository.RecomendBookRepository;
+import com.library.library.repository.RecommendBookRepository;
 
 import lombok.RequiredArgsConstructor;
 
@@ -14,19 +14,18 @@ import lombok.RequiredArgsConstructor;
 @Service
 public class RecommendBookService {
 
-    private final RecomendBookRepository recomendBookRepository;
+    private final RecommendBookRepository recommendBookRepository;
 
     public RecommendBook save(AddRecommendRequest request) {
-        User login_user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        User loginUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         try {
-            recomendBookRepository.deleteById(login_user.getStudentID());
+            recommendBookRepository.deleteById(loginUser.getStudentID());
         } catch (Exception e) {
         }
-        return recomendBookRepository.save(request.toRecommendBook());
+        return recommendBookRepository.save(request.toRecommendBook());
     }
 
-    public RecommendBook findbyStudentID(String studentID) {
-        return recomendBookRepository.findByStudentID(studentID);
+    public RecommendBook findByStudentID(String studentID) {
+        return recommendBookRepository.findByStudentID(studentID);
     }
-
 }

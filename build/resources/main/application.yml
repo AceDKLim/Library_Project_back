@@ -14,3 +14,6 @@ spring:
     url: jdbc:mysql://librarydb.ctaygwugsg84.ap-northeast-2.rds.amazonaws.com:3306/library_project?allowPublicKeyRetrieval=true&useSSL=false&serverTimezone=Asia/Seoul&characterEncoding=UTF-8
     username: admin
     password: countingstar
+API-Key:
+  aiKey: http://52.78.146.166:8000/keyword_to_isbn
+  aladinKey: ttbeleven10001124001

@@ -36,7 +36,7 @@ public class recommendBookApiController {
     @GetMapping("/api/recommend")
     public ResponseEntity<List<Book>> findRecommendBooks() {
         User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        String recommendBook = recommendBookService.findbyStudentID(user.getStudentID()).getIsbnNo();
+        String recommendBook = recommendBookService.findByStudentID(user.getStudentID()).getIsbnNo();
         List<Book> books = new ArrayList<>();
         String recommendBooks[] = recommendBook.split(",");
         for (int i = 0; i < 10; i++) {

@@ -2,7 +2,7 @@ package com.library.library.dto;
 
 import org.springframework.security.core.context.SecurityContextHolder;
 
-import com.library.library.domain.RecommendBook;
+import com.library.library.domain.FavoriteBook;
 import com.library.library.domain.User;
 
 import lombok.AllArgsConstructor;
@@ -12,12 +12,12 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
-public class AddRecommendRequest {
+public class AddFavoriteBookRequest {
 
-    private String tags;
+    private String isbnNo;
 
-    public RecommendBook toRecommendBook() {
+    public FavoriteBook toFavoriteBook() {
         User login_user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        return RecommendBook.builder().studentID(login_user.getStudentID()).isbnNo(tags).build();
+        return FavoriteBook.builder().studentID(login_user.getStudentID()).isbnNo(isbnNo).build();
     }
 }

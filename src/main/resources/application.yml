@@ -15,5 +15,5 @@ spring:
     username: admin
     password: countingstar
 API-Key:
-  aladinKey: ttbeleven10001124001
   aiKey: http://52.78.146.166:8000/keyword_to_isbn
+  aladinKey: ttbeleven10001124001

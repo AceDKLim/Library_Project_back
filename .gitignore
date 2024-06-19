@@ -1,6 +1,7 @@
 .gradle
 build/
 !gradle/wrapper/gradle-wrapper.jar
+!**/src/main/resources/
 !**/src/main/**/build/
 !**/src/test/**/build/
 
@@ -41,3 +42,5 @@ bin/
 ### Mac OS ###
 .DS_Store
 .fake
+
+/Users/imdong-gyun/Desktop/library_project/src/main/resources/application.yml
